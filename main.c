@@ -6,13 +6,13 @@
 /*   By: yalrfai <yalrfai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 14:19:03 by yaman-alrif       #+#    #+#             */
-/*   Updated: 2025/01/04 14:51:30 by yalrfai          ###   ########.fr       */
+/*   Updated: 2025/01/04 16:00:05 by yalrfai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-double	ft_atof(const char *str)
+static double	ft_atof(const char *str)
 {
 	double	result;
 	double	fraction;
@@ -40,7 +40,7 @@ double	ft_atof(const char *str)
 	return (sign * (result + fraction / divisor));
 }
 
-double	ft_atof_okay(const char *str)
+static double	ft_atof_okay(const char *str)
 {
 	int	dot_count;
 
@@ -64,7 +64,7 @@ double	ft_atof_okay(const char *str)
 	return (1);
 }
 
-void	check_args(char **v, t_mlx_data *data)
+static void	check_args(char **v, t_mlx_data *data)
 {
 	if (!(ft_atof_okay(v[2]) && ft_atof_okay(v[3])))
 	{

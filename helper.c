@@ -6,7 +6,7 @@
 /*   By: yalrfai <yalrfai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 15:23:23 by yalrfai           #+#    #+#             */
-/*   Updated: 2025/01/04 15:26:25 by yalrfai          ###   ########.fr       */
+/*   Updated: 2025/01/04 16:02:30 by yalrfai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,10 @@ void	see_fractal(t_mlx_data *data, double x, double y, char *name)
 	data->x = x;
 	data->y = y;
 	if (!strncmp(name, "mandelbrot", 11))
-	{
 		data->frac_name = 1;
-		mandelbrot(data);
-	}
 	else if (!strncmp(name, "julia", 5))
-	{
 		data->frac_name = 2;
-		julia(data, x, y);
-	}
 	else if (!strncmp(name, "mandelbar", 9))
-	{
 		data->frac_name = 3;
-		mandelbar(data);
-	}
+	do_fract(data);
 }

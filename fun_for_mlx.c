@@ -6,7 +6,7 @@
 /*   By: yalrfai <yalrfai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 15:17:21 by yalrfai           #+#    #+#             */
-/*   Updated: 2025/01/04 15:22:31 by yalrfai          ###   ########.fr       */
+/*   Updated: 2025/01/04 16:05:51 by yalrfai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,14 @@ int	handle_input(int keysym, t_mlx_data *data)
 	}
 	shift = 0.1 * data->pic.zoom;
 	if (keysym == XK_Left)
-		data->pic.offsetX -= shift;
+		data->pic.offsetx -= shift;
 	else if (keysym == XK_Right)
-		data->pic.offsetX += shift;
+		data->pic.offsetx += shift;
 	else if (keysym == XK_Up)
-		data->pic.offsetY -= shift;
+		data->pic.offsety -= shift;
 	else if (keysym == XK_Down)
-		data->pic.offsetY += shift;
-	if (data->frac_name == 1)
-		mandelbrot(data);
-	else if (data->frac_name == 2)
-		julia(data, data->x, data->y);
-	else if (data->frac_name == 3)
-		mandelbar(data);
+		data->pic.offsety += shift;
+	do_fract(data);
 	return (0);
 }
 
@@ -68,11 +63,13 @@ void	color_screen(t_mlx_data *data, int color)
 		x = -1;
 		while (++x < WIDTH)
 		{
-			if (x >= WIDTH * 0.1 && x < WIDTH * 0.9 && y >= HEIGHT * 0.1 && y < HEIGHT * 0.9)
+			if (x >= WIDTH * 0.1 && x < WIDTH * 0.9
+				&& y >= HEIGHT * 0.1 && y < HEIGHT * 0.9)
 				my_pixel_put(&data->imgd, x, y, color);
 		}
 	}
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->imgd.img_ptr, 0, 0);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+		data->imgd.img_ptr, 0, 0);
 }
 
 int	mouse_input(int button, int x, int y, t_mlx_data *data)
@@ -82,23 +79,22 @@ int	mouse_input(int button, int x, int y, t_mlx_data *data)
 	double	new_mouse_re;
 	double	new_mouse_im;
 
-	mouse_re = map(x, WIDTH, -2.5 * data->pic.zoom + data->pic.offsetX, 1.5 * data->pic.zoom + data->pic.offsetX);
-	mouse_im = map(y, HEIGHT, -2 * data->pic.zoom + data->pic.offsetY, 2 * data->pic.zoom + data->pic.offsetY);
+	mouse_re = map(x, WIDTH, -2.5 * data->pic.zoom + data->pic.offsetx,
+			1.5 * data->pic.zoom + data->pic.offsetx);
+	mouse_im = map(y, HEIGHT, -2 * data->pic.zoom + data->pic.offsety,
+			2 * data->pic.zoom + data->pic.offsety);
 	if (button == 1)
 		find_color(data);
 	else if (button == 4)
 		data->pic.zoom *= 1.1;
 	else if (button == 5)
 		data->pic.zoom /= 1.1;
-	new_mouse_re = map(x, WIDTH, -2.5 * data->pic.zoom + data->pic.offsetX, 1.5 * data->pic.zoom + data->pic.offsetX);
-	new_mouse_im = map(y, HEIGHT, -2 * data->pic.zoom + data->pic.offsetY, 2 * data->pic.zoom + data->pic.offsetY);
-	data->pic.offsetX += mouse_re - new_mouse_re;
-	data->pic.offsetY += mouse_im - new_mouse_im;
-	if (data->frac_name == 1)
-		mandelbrot(data);
-	else if (data->frac_name == 2)
-		julia(data, data->x, data->y);
-	else if (data->frac_name == 3)
-		mandelbar(data);
+	new_mouse_re = map(x, WIDTH, -2.5 * data->pic.zoom + data->pic.offsetx,
+			1.5 * data->pic.zoom + data->pic.offsetx);
+	new_mouse_im = map(y, HEIGHT, -2 * data->pic.zoom + data->pic.offsety,
+			2 * data->pic.zoom + data->pic.offsety);
+	data->pic.offsetx += mouse_re - new_mouse_re;
+	data->pic.offsety += mouse_im - new_mouse_im;
+	do_fract(data);
 	return (0);
 }

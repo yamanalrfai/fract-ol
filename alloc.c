@@ -6,7 +6,7 @@
 /*   By: yalrfai <yalrfai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 15:20:30 by yalrfai           #+#    #+#             */
-/*   Updated: 2025/01/04 15:21:29 by yalrfai          ###   ########.fr       */
+/*   Updated: 2025/01/04 15:59:09 by yalrfai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	make_data(t_mlx_data *data)
 {
-	data->pic = (t_pic){.zoom = 1.0, .offsetX = 0.0, .offsetY = 0.0};
+	data->pic = (t_pic){.zoom = 1.0, .offsetx = 0.0, .offsety = 0.0};
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
 		perror("mlx_init() failed");
@@ -24,7 +24,9 @@ void	make_data(t_mlx_data *data)
 	data->imgd.img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	if (!data->imgd.img_ptr)
 		free_data(data);
-	data->imgd.img_pixels_ptr = mlx_get_data_addr(data->imgd.img_ptr, &data->imgd.bits_per_pixel, &data->imgd.line_len, &data->imgd.endian);
+	data->imgd.img_pixels_ptr = mlx_get_data_addr(data->imgd.img_ptr,
+			&data->imgd.bits_per_pixel, &data->imgd.line_len,
+			&data->imgd.endian);
 	if (!data->imgd.img_pixels_ptr)
 		free_data(data);
 	data->color = 0x0000FF;
@@ -41,4 +43,14 @@ void	free_data(t_mlx_data *data)
 	if (data->mlx_ptr)
 		free(data->mlx_ptr);
 	exit(EXIT_SUCCESS);
+}
+
+void	do_fract(t_mlx_data *data)
+{
+	if (data->frac_name == 1)
+		mandelbrot(data);
+	else if (data->frac_name == 2)
+		julia(data, data->x, data->y);
+	else if (data->frac_name == 3)
+		mandelbar(data);
 }
