@@ -6,7 +6,7 @@
 /*   By: yalrfai <yalrfai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 11:58:25 by yaman-alrif       #+#    #+#             */
-/*   Updated: 2025/01/04 16:01:10 by yalrfai          ###   ########.fr       */
+/*   Updated: 2025/01/04 16:11:54 by yalrfai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_mlx_data
 	double	y;
 }	t_mlx_data;
 
-void	free_data(t_mlx_data *data);
+void	free_data(t_mlx_data *data, int want);
 void	my_pixel_put(t_img *img, int x, int y, int color);
 void	color_screen(t_mlx_data *data, int color);
 int		handle_input(int keysym, t_mlx_data *data);

@@ -6,7 +6,7 @@
 /*   By: yalrfai <yalrfai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 14:19:03 by yaman-alrif       #+#    #+#             */
-/*   Updated: 2025/01/04 16:00:05 by yalrfai          ###   ########.fr       */
+/*   Updated: 2025/01/04 16:21:35 by yalrfai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,12 @@ static double	ft_atof_okay(const char *str)
 	return (1);
 }
 
-static void	check_args(char **v, t_mlx_data *data)
+static int	check_args(char **v)
 {
 	if (!(ft_atof_okay(v[2]) && ft_atof_okay(v[3])))
-	{
-		free_data(data);
-		perror("Invalid argument");
-		exit(1);
-	}
+		return (0);
 	else
-		see_fractal(data, ft_atof(v[2]), ft_atof(v[3]), v[1]);
+		return (1);
 }
 
 int	main(int c, char **v)
@@ -82,13 +78,13 @@ int	main(int c, char **v)
 
 	if ((c == 2 && !strncmp(v[1], "mandelbrot", 11))
 		|| (c == 2 && !strncmp(v[1], "mandelbar", 10))
-		|| (c == 4 && !strncmp(v[1], "julia", 6)))
+		|| (c == 4 && !strncmp(v[1], "julia", 6) && check_args(v)))
 	{
 		make_data(&data);
 		if (c == 2)
 			see_fractal(&data, 0, 0, v[1]);
 		else if (c == 4)
-			check_args(v, &data);
+			see_fractal(&data, ft_atof(v[2]), ft_atof(v[3]), v[1]);;
 		mlx_key_hook(data.win_ptr, handle_input, &data);
 		mlx_hook(data.win_ptr, 17, 0, handle_close, &data);
 		mlx_mouse_hook(data.win_ptr, mouse_input, &data);
@@ -96,8 +92,8 @@ int	main(int c, char **v)
 	}
 	else
 	{
-		perror("Invalid argument");
-		exit(1);
+		perror("Usage: ./fractol beetle-mandelbrot-julia <real> <imaginary>");
+		exit(EXIT_FAILURE);
 	}
 	return (0);
 }

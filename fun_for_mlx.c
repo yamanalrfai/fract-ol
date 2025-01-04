@@ -6,7 +6,7 @@
 /*   By: yalrfai <yalrfai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 15:17:21 by yalrfai           #+#    #+#             */
-/*   Updated: 2025/01/04 16:05:51 by yalrfai          ###   ########.fr       */
+/*   Updated: 2025/01/04 16:11:41 by yalrfai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	handle_input(int keysym, t_mlx_data *data)
 
 	if (keysym == XK_Escape)
 	{
-		free_data(data);
+		free_data(data, 1);
 		exit(1);
 	}
 	shift = 0.1 * data->pic.zoom;
@@ -36,7 +36,7 @@ int	handle_input(int keysym, t_mlx_data *data)
 
 int	handle_close(t_mlx_data *data)
 {
-	free_data(data);
+	free_data(data, 1);
 	return (0);
 }
 
