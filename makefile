@@ -1,7 +1,7 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 MLX_FLAGS = -L. -lmlx -lXext -lX11 -lm
-SRC = main.c functions.c
+SRC = main.c fract.c alloc.c fun_for_mlx.c helper.c
 OBJ = $(SRC:.c=.o)
 TARGET = fractol
 
