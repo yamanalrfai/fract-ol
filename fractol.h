@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
+/*   By: yalrfai <yalrfai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 11:58:25 by yaman-alrif       #+#    #+#             */
-/*   Updated: 2025/01/02 20:55:49 by yaman-alrif      ###   ########.fr       */
+/*   Updated: 2025/01/02 22:30:25 by yalrfai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
-#include "minilibx/mlx.h"
+
+#include <mlx.h>
 #include <stdlib.h>
 #include <X11/keysym.h>
 #include <stdio.h>

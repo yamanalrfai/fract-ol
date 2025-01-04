@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
+/*   By: yalrfai <yalrfai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 12:27:39 by yaman-alrif       #+#    #+#             */
-/*   Updated: 2025/01/02 20:55:31 by yaman-alrif      ###   ########.fr       */
+/*   Updated: 2025/01/02 22:29:34 by yalrfai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,21 @@ void	color_screen(t_mlx_data *data, int color)
 
 int	handle_input(int keysym, t_mlx_data *data)
 {
+	double	shift;
 	if (keysym == XK_Escape)
 	{
 		free_data(data);
 		exit(1);
 	}
-
+	shift = 0.1 * data->pic.zoom;
 	if (keysym == XK_Left)
-		data->pic.offsetX -= 0.1 / data->pic.zoom;
+		data->pic.offsetX -= shift;
 	else if (keysym == XK_Right)
-		data->pic.offsetX += 0.1 / data->pic.zoom;
+		data->pic.offsetX += shift;
 	else if (keysym == XK_Up)
-		data->pic.offsetY -= 0.1 / data->pic.zoom;
+		data->pic.offsetY -= shift;
 	else if (keysym == XK_Down)
-		data->pic.offsetY += 0.1 / data->pic.zoom;
-
+		data->pic.offsetY += shift;
 	if (data->frac_name == 1)
 		mandelbrot(data);
 	else if (data->frac_name == 2)
